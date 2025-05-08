@@ -33,6 +33,70 @@ Resources:
             FilterCriteria:
               Filters:
                 - Pattern: '{"eventName": ["INSERT"]}'
+  TreatmentProtocolFunction:
+    Type: AWS::Serverless::Function
+    Properties: 
+      CodeUri: treatment-protocol-function
+      Handler: telran.pma.AppRecommendationProvider::handleRequest
+      Policies: 
+        - Statement:
+            Effect: Allow
+            Resource: '*'
+            Action:
+              - dynamodb:*
+      Environment:
+        Variables:
+          PATIENT_DATA_PROVIDER_CLASS_NAME: "telran.pma.PatientDataHttpClient"
+          LOGGER_LEVEL: finest
+          DB_PASSWORD: 123456.com
+      Events: 
+        DynamoDbItemInsert:
+          Type: DynamoDB
+          Properties:
+            StartingPosition: LATEST
+            BatchSize: 1
+            Stream: !GetAtt SavedPatientCallStream.StreamArn
+            FilterCriteria:
+              Filters:
+                - Pattern: '{"eventName": ["INSERT"]}'
+  ApprovalStream:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: patient-approvals
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        - AttributeName: timestamp
+          KeyType: RANGE
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: N
+        - AttributeName: timestamp
+          AttributeType: N
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      StreamSpecification:
+        StreamViewType: NEW_IMAGE
+  RejectStream:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: patient-rejects
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        - AttributeName: timestamp
+          KeyType: RANGE
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: N
+        - AttributeName: timestamp
+          AttributeType: N
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      StreamSpecification:
+        StreamViewType: NEW_IMAGE
   PatientCallStream:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -57,12 +121,12 @@ Resources:
     Properties:
       TableName: saved-patient-calls
       KeySchema:
-        - AttributeName: patientId
+        - AttributeName: id
           KeyType: HASH
         - AttributeName: timestamp
           KeyType: RANGE
       AttributeDefinitions:
-        - AttributeName: patientId
+        - AttributeName: id
           AttributeType: N
         - AttributeName: timestamp
           AttributeType: N
@@ -89,4 +153,4 @@ Resources:
 Outputs:
   PatientDataProviderApi:
     Description: "API Gateway endpoint URL for Prod stage for PatientDataProvider function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/patients/"
+    Value: !Sub "http://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/patients/"

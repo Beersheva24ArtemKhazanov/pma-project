@@ -31,7 +31,7 @@ public class PatientCallSaverData implements SaverData {
     public PatientCallSaverData() {
         try {
             con = DriverManager.getConnection(connectionStr, username, password);
-            pstmt = con.prepareStatement("INSERT INTO patient_calls (patient_id, vas_level, timestamp) VALUES (?, ?, ?)");
+            pstmt = con.prepareStatement("INSERT INTO patient_calls (id, patient_id, vas_level, timestamp) VALUES (?, ?, ?, ?)");
         } catch (Exception e) {
             logger.log("severe", "error: " + e.getMessage());
             throw new RuntimeException(e);
@@ -41,9 +41,10 @@ public class PatientCallSaverData implements SaverData {
     @Override
     public void saveData(Map<String, Object> data) {
         try {
-            pstmt.setLong(1, Long.parseLong(data.get("patientId").toString()));
-            pstmt.setLong(2, Long.parseLong(data.get("vasLevel").toString()));
-            pstmt.setLong(3, Long.parseLong(data.get("timestamp").toString()));
+            pstmt.setLong(1, Long.parseLong(data.get("id").toString()));
+            pstmt.setLong(2, Long.parseLong(data.get("patientId").toString()));
+            pstmt.setLong(3, Long.parseLong(data.get("vasLevel").toString()));
+            pstmt.setLong(4, Long.parseLong(data.get("timestamp").toString()));
             pstmt.executeUpdate();
             logger.log("info", "Data saved successfully: " + data.toString());
         } catch (Exception e) {

@@ -1,0 +1,1396 @@
+[
+    {
+        "1-2": [
+            {
+                "route": "PO",
+                "contraindications": [
+                    "571.201",
+                    "571.501",
+                    "571.502",
+                    "571.503",
+                    "571.601",
+                    "58703",
+                    "57009",
+                    "571.301",
+                    "571.901"
+                ],
+                "hierarchy": 1,
+                "sensitivity": [
+                    "PARACETAMOL"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "PARACETAMOL"
+                    ],
+                    "weight": {
+                        "min_threshold": 50,
+                        "interval": 8
+                    },
+                    "interval": 6,
+                    "dosing": "1000",
+                    "child_pugh": [
+                        {
+                            "interval": 12,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ],
+                    "drug": [
+                        "ACAMOL",
+                        "DEXAMOL"
+                    ]
+                }
+            },
+            {
+                "route": "PO",
+                "contraindications": [
+                    "287.4901",
+                    "287.501"
+                ],
+                "hierarchy": 1,
+                "wbc": {
+                    "min_threshold": 4,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "DIPYRONE"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "DIPYRONE"
+                    ],
+                    "interval": 6,
+                    "dosing": "1000",
+                    "drug": [
+                        "OPTALGIN",
+                        "DIPYRAZ"
+                    ]
+                }
+            },
+            {
+                "sodium": {
+                    "min_threshold": 13,
+                    "avoid": true
+                },
+                "gfr": {
+                    "min_threshold": 30,
+                    "avoid": true
+                },
+                "route": "PO",
+                "contraindications": [
+                    "571.201",
+                    "571.501",
+                    "571.502",
+                    "571.503",
+                    "571.601",
+                    "58703",
+                    "57009",
+                    "571.301",
+                    "571.901",
+                    "V45.1101",
+                    "V45.1103",
+                    "327.2301",
+                    "327.2302",
+                    "345.0001",
+                    "345.0002",
+                    "345.1001",
+                    "345.1002",
+                    "345.1003",
+                    "345.10W1",
+                    "345.1101",
+                    "345.4001",
+                    "345.5001",
+                    "345.5002",
+                    "345.7101",
+                    "345.8002",
+                    "345.8003",
+                    "345.8004",
+                    "345.8005",
+                    "345.9001",
+                    "345.9002",
+                    "345.0003",
+                    "345.9002",
+                    "780.3902",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101",
+                    "585.4W1",
+                    "585.5W1",
+                    "585.6W2",
+                    "253.601"
+                ],
+                "hierarchy": 1,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "PARACETAMOL",
+                    "TRAMADOL"
+                ],
+                "first": {
+                    "age_adjustment": {
+                        "max_threshold": 75,
+                        "avoid": true
+                    },
+                    "active_moiety": [
+                        "PARACETAMOL",
+                        "325",
+                        "mg",
+                        "TRAMADOL",
+                        "37.5",
+                        "mg"
+                    ],
+                    "interval": 8,
+                    "dosing": "1 tab",
+                    "child_pugh": [
+                        {
+                            "interval": 8,
+                            "class": "A"
+                        },
+                        {
+                            "interval": 12,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ],
+                    "drug": [
+                        "ZALDIAR"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "3-4": [
+            {
+                "sodium": {
+                    "min_threshold": 13,
+                    "avoid": true
+                },
+                "gfr": {
+                    "min_threshold": 30,
+                    "avoid": true
+                },
+                "route": "PO",
+                "contraindications": [
+                    "571.201",
+                    "571.501",
+                    "571.502",
+                    "571.503",
+                    "571.601",
+                    "58703",
+                    "57009",
+                    "571.301",
+                    "571.901",
+                    "V45.1101",
+                    "V45.1103",
+                    "327.2301",
+                    "327.2302",
+                    "345.0001",
+                    "345.0002",
+                    "345.1001",
+                    "345.1002",
+                    "345.1003",
+                    "345.10W1",
+                    "345.1101",
+                    "345.4001",
+                    "345.5001",
+                    "345.5002",
+                    "345.7101",
+                    "345.8002",
+                    "345.8003",
+                    "345.8004",
+                    "345.8005",
+                    "345.9001",
+                    "345.9002",
+                    "345.0003",
+                    "345.9002",
+                    "780.3902",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101",
+                    "585.4W1",
+                    "585.5W1",
+                    "585.6W2",
+                    "253.601"
+                ],
+                "hierarchy": 1,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "TRAMADOL",
+                    "PARACETAMOL"
+                ],
+                "first": {
+                    "age_adjustment": {
+                        "max_threshold": 75,
+                        "avoid": true
+                    },
+                    "active_moiety": [
+                        "TRAMADOL"
+                    ],
+                    "interval": 6,
+                    "dosing": "50",
+                    "child_pugh": [
+                        {
+                            "interval": 8,
+                            "dosing": 50,
+                            "class": "A"
+                        },
+                        {
+                            "interval": 12,
+                            "dosing": 25,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ],
+                    "drug": [
+                        "TRAMAL"
+                    ]
+                },
+                "second": {
+                    "active_moiety": [
+                        "PARACETAMOL"
+                    ],
+                    "age_adjustment": {
+                        "max_threshold": 18,
+                        "avoid": true
+                    },
+                    "interval": 6,
+                    "dosing": "500",
+                    "child_pugh": [
+                        {
+                            "interval": 8,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ]
+                }
+            },
+            {
+                "sodium": {
+                    "min_threshold": 13,
+                    "avoid": true
+                },
+                "gfr": {
+                    "min_threshold": 30,
+                    "avoid": true
+                },
+                "route": "PO",
+                "contraindications": [
+                    "V45.1101",
+                    "V45.1103",
+                    "287.4901",
+                    "287.501",
+                    "327.2301",
+                    "327.2302",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101",
+                    "585.4W1",
+                    "585.5W1",
+                    "585.6W2",
+                    "253.601"
+                ],
+                "hierarchy": 1,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "TRAMADOL",
+                    "DIPYRONE"
+                ],
+                "first": {
+                    "age_adjustment": {
+                        "max_threshold": 75,
+                        "avoid": true
+                    },
+                    "active_moiety": [
+                        "TRAMADOL"
+                    ],
+                    "interval": 6,
+                    "dosing": "50",
+                    "drug": [
+                        "TRAMAL"
+                    ]
+                },
+                "second": {
+                    "active_moiety": [
+                        "DIPYRONE"
+                    ],
+                    "age_adjustment": {
+                        "max_threshold": 18,
+                        "avoid": true
+                    },
+                    "interval": 6,
+                    "dosing": "500"
+                }
+            },
+            {
+                "route": "PO",
+                "contraindications": [
+                    "287.4901",
+                    "287.501"
+                ],
+                "hierarchy": 1,
+                "wbc": {
+                    "min_threshold": 4,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "DIPYRONE"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "DIPYRONE"
+                    ],
+                    "interval": 6,
+                    "dosing": "1000",
+                    "drug": [
+                        "OPTALGIN",
+                        "DIPYRAZ"
+                    ]
+                }
+            },
+            {
+                "route": "PO",
+                "contraindications": [
+                    "571.201",
+                    "571.501",
+                    "571.502",
+                    "571.503",
+                    "571.601",
+                    "58703",
+                    "57009",
+                    "571.301",
+                    "571.901"
+                ],
+                "hierarchy": 1,
+                "sensitivity": [
+                    "PARACETAMOL"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "PARACETAMOL"
+                    ],
+                    "weight": {
+                        "min_threshold": 50,
+                        "interval": 8
+                    },
+                    "interval": 6,
+                    "dosing": "1000",
+                    "child_pugh": [
+                        {
+                            "interval": 12,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ],
+                    "drug": [
+                        "ACAMOL",
+                        "DEXAMOL"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "8-10": [
+            {
+                "gfr": {
+                    "min_threshold": 30,
+                    "avoid": true
+                },
+                "route": "IV",
+                "contraindications": [
+                    "571.201",
+                    "571.501",
+                    "571.502",
+                    "571.503",
+                    "571.601",
+                    "58703",
+                    "57009",
+                    "571.301",
+                    "571.901",
+                    "327.2301",
+                    "327.2302",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101",
+                    "585.4W1",
+                    "585.5W1",
+                    "585.6W2"
+                ],
+                "hierarchy": 1,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "MORPHINE",
+                    "PARACETAMOL"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "MORPHINE"
+                    ],
+                    "interval": 6,
+                    "dosing": "10",
+                    "child_pugh": [
+                        {
+                            "dosing": 5,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ],
+                    "drug": [
+                        "MORPHINE"
+                    ]
+                },
+                "second": {
+                    "active_moiety": [
+                        "PARACETAMOL"
+                    ],
+                    "age_adjustment": {
+                        "max_threshold": 18,
+                        "avoid": true
+                    },
+                    "weight": {
+                        "min_threshold": 50,
+                        "interval": 8
+                    },
+                    "interval": 6,
+                    "dosing": "1000",
+                    "child_pugh": [
+                        {
+                            "interval": 12,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ]
+                }
+            },
+            {
+                "gfr": {
+                    "min_threshold": 30,
+                    "avoid": true
+                },
+                "route": "IV",
+                "contraindications": [
+                    "287.4901",
+                    "287.501",
+                    "327.2301",
+                    "327.2302",
+                    "327.2302",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101",
+                    "585.4W1",
+                    "585.5W1",
+                    "585.6W2"
+                ],
+                "hierarchy": 1,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "wbc": {
+                    "min_threshold": 4,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "MORPHINE",
+                    "DIPYRONE"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "MORPHINE"
+                    ],
+                    "interval": 6,
+                    "dosing": "10",
+                    "child_pugh": [
+                        {
+                            "dosing": 5,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ],
+                    "drug": [
+                        "MORPHINE"
+                    ]
+                },
+                "second": {
+                    "active_moiety": [
+                        "DIPYRONE"
+                    ],
+                    "age_adjustment": {
+                        "max_threshold": 18,
+                        "avoid": true
+                    },
+                    "interval": 6,
+                    "dosing": "1000"
+                }
+            },
+            {
+                "sodium": {
+                    "min_threshold": 13,
+                    "avoid": true
+                },
+                "gfr": {
+                    "min_threshold": 30,
+                    "avoid": true
+                },
+                "route": "IV",
+                "contraindications": [
+                    "571.201",
+                    "571.501",
+                    "571.502",
+                    "571.503",
+                    "571.601",
+                    "58703",
+                    "57009",
+                    "571.301",
+                    "571.901",
+                    "V45.1101",
+                    "V45.1103",
+                    "327.2301",
+                    "327.2302",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101",
+                    "585.4W1",
+                    "585.5W1",
+                    "585.6W2",
+                    "253.601"
+                ],
+                "hierarchy": 1,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "TRAMADOL",
+                    "PARACETAMOL"
+                ],
+                "first": {
+                    "age_adjustment": {
+                        "max_threshold": 75,
+                        "avoid": true
+                    },
+                    "active_moiety": [
+                        "TRAMADOL"
+                    ],
+                    "weight": {
+                        "min_threshold": 50,
+                        "dosing": 50
+                    },
+                    "interval": 8,
+                    "dosing": "100",
+                    "child_pugh": [
+                        {
+                            "interval": 8,
+                            "dosing": 50,
+                            "class": "A"
+                        },
+                        {
+                            "interval": 12,
+                            "dosing": 25,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ],
+                    "drug": [
+                        "TRAMAL"
+                    ]
+                },
+                "second": {
+                    "active_moiety": [
+                        "PARACETAMOL"
+                    ],
+                    "age_adjustment": {
+                        "max_threshold": 18,
+                        "avoid": true
+                    },
+                    "weight": {
+                        "min_threshold": 50,
+                        "interval": 8
+                    },
+                    "interval": 6,
+                    "dosing": "1000",
+                    "child_pugh": [
+                        {
+                            "interval": 12,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ]
+                }
+            },
+            {
+                "sodium": {
+                    "min_threshold": 13,
+                    "avoid": true
+                },
+                "gfr": {
+                    "min_threshold": 30,
+                    "avoid": true
+                },
+                "route": "IV",
+                "contraindications": [
+                    "V45.1101",
+                    "V45.1103",
+                    "287.4901",
+                    "287.501",
+                    "327.2301",
+                    "327.2302",
+                    "345.0001",
+                    "345.0002",
+                    "345.1001",
+                    "345.1002",
+                    "345.1003",
+                    "345.10W1",
+                    "345.1101",
+                    "345.4001",
+                    "345.5001",
+                    "345.5002",
+                    "345.7101",
+                    "345.8002",
+                    "345.8003",
+                    "345.8004",
+                    "345.8005",
+                    "345.9001",
+                    "345.9002",
+                    "345.0003",
+                    "345.9002",
+                    "780.3902",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101",
+                    "585.4W1",
+                    "585.5W1",
+                    "585.6W2",
+                    "253.601"
+                ],
+                "hierarchy": 1,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "wbc": {
+                    "min_threshold": 4,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "TRAMADOL",
+                    "DIPYRONE"
+                ],
+                "first": {
+                    "age_adjustment": {
+                        "max_threshold": 75,
+                        "avoid": true
+                    },
+                    "active_moiety": [
+                        "TRAMADOL"
+                    ],
+                    "weight": {
+                        "min_threshold": 50,
+                        "dosing": 50
+                    },
+                    "interval": 8,
+                    "dosing": "100",
+                    "child_pugh": [
+                        {
+                            "interval": 8,
+                            "dosing": 50,
+                            "class": "A"
+                        },
+                        {
+                            "interval": 12,
+                            "dosing": 25,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ],
+                    "drug": [
+                        "TRAMAL"
+                    ]
+                },
+                "second": {
+                    "active_moiety": [
+                        "DIPYRONE"
+                    ],
+                    "age_adjustment": {
+                        "max_threshold": 18,
+                        "avoid": true
+                    },
+                    "interval": 6,
+                    "dosing": 1000
+                }
+            },
+            {
+                "route": "PO",
+                "contraindications": [
+                    "571.201",
+                    "571.501",
+                    "571.502",
+                    "571.503",
+                    "571.601",
+                    "58703",
+                    "57009",
+                    "571.301",
+                    "571.901",
+                    "327.2301",
+                    "327.2302",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101"
+                ],
+                "hierarchy": 2,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "PARACETAMOL",
+                    "OXYCODONE"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "PARACETAMOL",
+                        "OXYCODONE"
+                    ],
+                    "interval": 6,
+                    "dosing": "1 tab",
+                    "drug": [
+                        "PERCOCET-10"
+                    ]
+                },
+                "second": {
+                    "child_pugh": [
+                        {
+                            "interval": 12,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ]
+                }
+            },
+            {
+                "route": "PO",
+                "contraindications": [
+                    "287.4901",
+                    "287.501",
+                    "327.2301",
+                    "327.2302",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101"
+                ],
+                "hierarchy": 2,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "DIPYRONE",
+                    "OXYCODONE"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "OXYCODONE"
+                    ],
+                    "interval": 6,
+                    "dosing": "10",
+                    "drug": [
+                        "OXYCOD FORTE"
+                    ]
+                },
+                "second": {
+                    "active_moiety": [
+                        "DIPYRONE"
+                    ],
+                    "age_adjustment": {
+                        "max_threshold": 18,
+                        "avoid": true
+                    },
+                    "interval": 6,
+                    "dosing": 1000
+                }
+            },
+            {
+                "route": "PO",
+                "contraindications": [
+                    "571.201",
+                    "571.501",
+                    "571.502",
+                    "571.503",
+                    "571.601",
+                    "58703",
+                    "57009",
+                    "571.301",
+                    "571.901",
+                    "327.2301",
+                    "327.2302",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101"
+                ],
+                "hierarchy": 2,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "PARACETAMOL",
+                    "OXYCODONE"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "OXYCODONE"
+                    ],
+                    "interval": 6,
+                    "dosing": "10",
+                    "drug": [
+                        "OXYCOD FORTE"
+                    ]
+                },
+                "second": {
+                    "active_moiety": [
+                        "PARACETAMOL"
+                    ],
+                    "age_adjustment": {
+                        "max_threshold": 18,
+                        "avoid": true
+                    },
+                    "interval": 6,
+                    "dosing": 1000,
+                    "weight": {
+                        "min_threshold": 50,
+                        "interval": 8
+                    }
+                }
+            },
+            {
+                "gfr": {
+                    "min_threshold": 30,
+                    "avoid": true
+                },
+                "route": "IM",
+                "contraindications": [
+                    "V45.1101",
+                    "V45.1103",
+                    "327.2301",
+                    "327.2302",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101",
+                    "585.3W1",
+                    "585.4W1",
+                    "585.5W1",
+                    "585.6W2"
+                ],
+                "hierarchy": 3,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "plt": {
+                    "min_threshold": 100,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "PETHIDINE",
+                    "MEPERIDINE"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "PETHIDINE"
+                    ],
+                    "interval": 6,
+                    "dosing": "75",
+                    "drug": [
+                        "DOLESTINE"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "5-7": [
+            {
+                "gfr": {
+                    "min_threshold": 30,
+                    "interval": 8
+                },
+                "route": "PO",
+                "contraindications": [
+                    "571.201",
+                    "571.501",
+                    "571.502",
+                    "571.503",
+                    "571.601",
+                    "58703",
+                    "57009",
+                    "571.301",
+                    "571.901",
+                    "327.2301",
+                    "327.2302",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101"
+                ],
+                "hierarchy": 1,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "PARACETAMOL",
+                    "OXYCODONE"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "PARACETAMOL",
+                        "OXYCODONE"
+                    ],
+                    "interval": 6,
+                    "dosing": "1 tab",
+                    "child_pugh": [
+                        {
+                            "interval": 12,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ],
+                    "drug": [
+                        "PERCOCET-5"
+                    ]
+                }
+            },
+            {
+                "gfr": {
+                    "min_threshold": 30,
+                    "interval": 8
+                },
+                "route": "PO",
+                "contraindications": [
+                    "287.4901",
+                    "287.501",
+                    "327.2301",
+                    "327.2302",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101"
+                ],
+                "hierarchy": 1,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "wbc": {
+                    "min_threshold": 4,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "DIPYRONE",
+                    "OXYCODONE"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "OXYCODONE"
+                    ],
+                    "interval": 6,
+                    "dosing": 4,
+                    "child_pugh": [
+                        {
+                            "interval": 12,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ],
+                    "drug": [
+                        "OXYCOD FORTE"
+                    ]
+                },
+                "second": {
+                    "active_moiety": [
+                        "DIPYRONE"
+                    ],
+                    "age_adjustment": {
+                        "max_threshold": 18,
+                        "avoid": true
+                    },
+                    "interval": 6,
+                    "dosing": "500"
+                }
+            },
+            {
+                "gfr": {
+                    "min_threshold": 30,
+                    "interval": 8
+                },
+                "route": "PO",
+                "contraindications": [
+                    "571.201",
+                    "571.501",
+                    "571.502",
+                    "571.503",
+                    "571.601",
+                    "58703",
+                    "57009",
+                    "571.301",
+                    "571.901",
+                    "327.2301",
+                    "327.2302",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101"
+                ],
+                "hierarchy": 1,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "PARACETAMOL",
+                    "OXYCODONE"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "OXYCODONE"
+                    ],
+                    "interval": 6,
+                    "dosing": 4,
+                    "child_pugh": [
+                        {
+                            "interval": 12,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ],
+                    "drug": [
+                        "OXYCOD FORTE"
+                    ]
+                },
+                "second": {
+                    "active_moiety": [
+                        "PARACETAMOL"
+                    ],
+                    "age_adjustment": {
+                        "max_threshold": 18,
+                        "avoid": true
+                    },
+                    "interval": 6,
+                    "dosing": "500",
+                    "child_pugh": [
+                        {
+                            "interval": 8,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ]
+                }
+            },
+            {
+                "sodium": {
+                    "min_threshold": 13,
+                    "avoid": true
+                },
+                "gfr": {
+                    "min_threshold": 30,
+                    "avoid": true
+                },
+                "route": "IV",
+                "contraindications": [
+                    "V45.1101",
+                    "V45.1103",
+                    "327.2301",
+                    "327.2302",
+                    "345.0001",
+                    "345.0002",
+                    "345.1001",
+                    "345.1002",
+                    "345.1003",
+                    "345.10W1",
+                    "345.1101",
+                    "345.4001",
+                    "345.5001",
+                    "345.5002",
+                    "345.7101",
+                    "345.8002",
+                    "345.8003",
+                    "345.8004",
+                    "345.8005",
+                    "345.9001",
+                    "345.9002",
+                    "345.0003",
+                    "345.9002",
+                    "780.3902",
+                    "560.902",
+                    "560.903",
+                    "537.201",
+                    "560.101",
+                    "560.102",
+                    "560.103",
+                    "560.104",
+                    "560.105",
+                    "560.3101",
+                    "585.4W1",
+                    "585.5W1",
+                    "585.6W2",
+                    "253.601"
+                ],
+                "hierarchy": 2,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "TRAMADOL"
+                ],
+                "first": {
+                    "age_adjustment": {
+                        "max_threshold": 75,
+                        "avoid": true
+                    },
+                    "active_moiety": [
+                        "TRAMADOL"
+                    ],
+                    "weight": {
+                        "min_threshold": 50,
+                        "dosing": 50
+                    },
+                    "interval": 8,
+                    "dosing": "100",
+                    "child_pugh": [
+                        {
+                            "interval": 8,
+                            "dosing": 50,
+                            "class": "A"
+                        },
+                        {
+                            "interval": 12,
+                            "dosing": 25,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ],
+                    "drug": [
+                        "TRAMAL"
+                    ]
+                }
+            },
+            {
+                "route": "IV",
+                "contraindications": [
+                    "571.201",
+                    "571.501",
+                    "571.502",
+                    "571.503",
+                    "571.601",
+                    "58703",
+                    "57009",
+                    "571.301",
+                    "571.901"
+                ],
+                "hierarchy": 2,
+                "sat": {
+                    "min_threshold": 93,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "PARACETAMOL"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "PARACETAMOL"
+                    ],
+                    "weight": {
+                        "min_threshold": 50,
+                        "interval": 8
+                    },
+                    "interval": 6,
+                    "dosing": "1000",
+                    "child_pugh": [
+                        {
+                            "interval": 12,
+                            "class": "B"
+                        },
+                        {
+                            "avoid": true,
+                            "class": "C"
+                        }
+                    ],
+                    "drug": [
+                        "PERFALGAN"
+                    ]
+                }
+            },
+            {
+                "route": "IV",
+                "contraindications": [
+                    "287.4901",
+                    "287.501"
+                ],
+                "hierarchy": 2,
+                "wbc": {
+                    "min_threshold": 4,
+                    "avoid": true
+                },
+                "sensitivity": [
+                    "DIPYRONE"
+                ],
+                "first": {
+                    "active_moiety": [
+                        "DIPYRONE"
+                    ],
+                    "interval": 6,
+                    "dosing": "1000",
+                    "drug": [
+                        "OPTALGIN",
+                        "DIPYRAZ"
+                    ]
+                }
+            }
+        ]
+    }
+]
