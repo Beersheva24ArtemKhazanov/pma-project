@@ -3,26 +3,28 @@ package telran.pma;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.S3Object;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
+import telran.pma.logger.Logger;
 
-public class S3JsonClient implements S3Client {
-    AmazonS3 client = AmazonS3ClientBuilder.standard().withRegion("us-east-1").build();
-
-    @Override
+public class S3JsonClient{
+    Logger[] loggers = new Logger[1];
+    S3Client client;
+    
+    public S3JsonClient() {
+        client = S3Client.builder().region(Region.of("us-east-1")).build();
+    }
     public String getS3Object(String bucketName, String objectKey) {
-        S3Object obj = client.getObject(bucketName, objectKey);
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(obj.getObjectContent())))  {
-            StringBuilder json = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(client.getObject(b -> b.bucket(bucketName).key(objectKey))))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                json.append(line);
+                sb.append(line);
             }
-            return json.toString();
         } catch (Exception e) {
-            throw new RuntimeException("Error reading S3 object: " + e.getMessage(), e);
+            loggers[0].log("severe", "error: " + e.getMessage());
         }
+        return sb.toString();
     }
 
 }

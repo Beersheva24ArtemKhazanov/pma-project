@@ -11,11 +11,11 @@
             "id": {
               "N": "1"
             },
-            "vasLevel": {
-              "N": "9"
-            },
-            "patientId": {
+            "patientCallId": {
               "N": "1"
+            },
+            "recommendationData": {
+              "S": "[{\"route\":\"PO\",\"activeMoiety\":\"PARACETAMOL, OXYCODONE\",\"interval\":6,\"dosing\":\"1 tab\",\"recId\":2960202945101776742}]"
             },
             "timestamp": {
               "N": "23"

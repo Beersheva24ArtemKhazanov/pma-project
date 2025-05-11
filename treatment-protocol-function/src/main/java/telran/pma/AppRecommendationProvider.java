@@ -40,7 +40,7 @@ public class AppRecommendationProvider {
     PatientDataClient patientDataClient;
     MiddlewareDataStream<ApprovalData> streamApproval;
     MiddlewareDataStream<RejectData> streamReject;
-    S3Client s3Client;
+    S3JsonClient s3Client;
 
     @SuppressWarnings("unchecked")
     public AppRecommendationProvider()  {
@@ -64,7 +64,7 @@ public class AppRecommendationProvider {
             throw new RuntimeException(e);
         }
         try {
-            s3Client = S3Client.getS3Client(s3ClientClassName, logger);
+            s3Client = new S3JsonClient();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -86,16 +86,18 @@ public class AppRecommendationProvider {
                 String protocol = s3Client.getS3Object(s3BucketName, s3PathToJson);
                 logger.log("finest", "JSON - PROTOCOL: " + protocol);
                 ArrayList<Recommendation> recommendationsList = CheckingSchema.getRecommendations(patientData, savedPatientCall.vasLevel(), protocol);
-                logger.log("finest", "Recommendations: " + recommendationsList.toString());
+                String forLog = recommendationsList != null ? recommendationsList.toString() : "No recommendations";
+                logger.log("finest", "Recommendations: " + forLog);
                 long id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
                 long timestamp = System.currentTimeMillis();
-                if (recommendationsList.size() > 0) {
+                if (recommendationsList != null) {
                     Recommendation[] recommendations = recommendationsList.toArray(new Recommendation[recommendationsList.size()]);
                     ApprovalData approvalData = new ApprovalData(id, savedPatientCall.id(), timestamp, recommendations);
                     logger.log("finest", "ApprovalData: " + approvalData.toString());
                     streamApproval.publish(approvalData);
                 } else {
-                    RejectData rejectData = new RejectData(id, savedPatientCall.id(), timestamp);
+                    String resason = "No recommendations for this patient call";
+                    RejectData rejectData = new RejectData(id, savedPatientCall.id(), resason, timestamp);
                     logger.log("finest", "RejectData: " + rejectData.toString());
                     streamReject.publish(rejectData);
                 }

@@ -11,7 +11,9 @@ import telran.pma.logger.Logger;
 
 public class PatientDataHttpClient implements PatientDataClient{
     private String baseURL = getBaseURL();
-    HttpClient httpClient = HttpClient.newHttpClient();
+    HttpClient httpClient = HttpClient.newBuilder()
+    .followRedirects(HttpClient.Redirect.ALWAYS)
+    .build();
     Logger logger = loggers[0];
 
     public PatientDataHttpClient() {
@@ -21,19 +23,19 @@ public class PatientDataHttpClient implements PatientDataClient{
 
     @Override
     public PatientData getPatientData(long patientId) {
-        HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create(getURI(patientId))).build();
+        HttpRequest request = HttpRequest.newBuilder().header("Accept", "application/json").GET().uri(URI.create(getURI(patientId))).build();
         try {
             HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
             if (response.statusCode() > 399) {
                 throw new Exception(response.body());
-            }
-            PatientData patientData = PatientData.of(response.body());
+            };
+            logger.log("finest", "Response is: " + response.body().toString());
+            PatientData patientData = PatientData.of(response.body().toString());
             logger.log("finest", "PatientData: " + patientData.toString());
             return patientData;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
-        }
-                
+        }         
     }
 
     private String getURI(long patientId) {

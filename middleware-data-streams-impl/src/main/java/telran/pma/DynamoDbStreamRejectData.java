@@ -17,6 +17,7 @@ public class DynamoDbStreamRejectData extends DynamoDbStream<RejectData>  {
        HashMap<String, AttributeValue> map = new HashMap<>() {{
             put("id", AttributeValue.builder().n(obj.id() + "").build());
             put("patientCallId", AttributeValue.builder().n(obj.patientCallId() + "").build());
+            put("reason", AttributeValue.builder().s(obj.reason()).build());
             put("timestamp", AttributeValue.builder().n(obj.timestamp() + "").build());
         }};
         return map;

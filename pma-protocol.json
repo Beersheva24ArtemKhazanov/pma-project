@@ -849,18 +849,6 @@
                     "drug": [
                         "PERCOCET-10"
                     ]
-                },
-                "second": {
-                    "child_pugh": [
-                        {
-                            "interval": 12,
-                            "class": "B"
-                        },
-                        {
-                            "avoid": true,
-                            "class": "C"
-                        }
-                    ]
                 }
             },
             {

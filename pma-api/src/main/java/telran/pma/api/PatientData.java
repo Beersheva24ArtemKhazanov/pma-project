@@ -14,7 +14,7 @@ public record PatientData(long id, int age, int weight, String childPugh, int gf
         double wbc = json.getDouble("wbc");
         int sat = json.getInt("sat");
         int sodium = json.getInt("sodium");
-        String sensetivity = json.getString("sensetivity");
+        String sensetivity = json.optString("sensetivity");
         String[] contraindications = json.optJSONArray("contraindications") != null ? 
             json.getJSONArray("contraindications").toList().toArray(new String[0]) : 
             null;

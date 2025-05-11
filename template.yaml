@@ -33,6 +33,56 @@ Resources:
             FilterCriteria:
               Filters:
                 - Pattern: '{"eventName": ["INSERT"]}'
+  ApprovalPopulatorFunction:
+    Type: AWS::Serverless::Function
+    Properties: 
+      CodeUri: approval-populator
+      Handler: telran.pma.ApprovalPopulator::handleRequest
+      Policies: 
+        - Statement:
+            Effect: Allow
+            Resource: '*'
+            Action:
+              - dynamodb:*
+      Environment:
+        Variables:
+          LOGGER_LEVEL: finest
+          DB_PASSWORD: 123456.com
+      Events: 
+        DynamoDbItemInsert:
+          Type: DynamoDB
+          Properties:
+            StartingPosition: LATEST
+            BatchSize: 1
+            Stream: !GetAtt ApprovalStream.StreamArn
+            FilterCriteria:
+              Filters:
+                - Pattern: '{"eventName": ["INSERT"]}'
+  RejectPopulatorFunction:
+    Type: AWS::Serverless::Function
+    Properties: 
+      CodeUri: reject-populator
+      Handler: telran.pma.RejectPopulator::handleRequest
+      Policies: 
+        - Statement:
+            Effect: Allow
+            Resource: '*'
+            Action:
+              - dynamodb:*
+      Environment:
+        Variables:
+          LOGGER_LEVEL: finest
+          DB_PASSWORD: 123456.com
+      Events: 
+        DynamoDbItemInsert:
+          Type: DynamoDB
+          Properties:
+            StartingPosition: LATEST
+            BatchSize: 1
+            Stream: !GetAtt RejectStream.StreamArn
+            FilterCriteria:
+              Filters:
+                - Pattern: '{"eventName": ["INSERT"]}'
   TreatmentProtocolFunction:
     Type: AWS::Serverless::Function
     Properties: 
@@ -47,6 +97,8 @@ Resources:
       Environment:
         Variables:
           PATIENT_DATA_PROVIDER_CLASS_NAME: "telran.pma.PatientDataHttpClient"
+          PATIENT_DATA_URL: !Sub "http://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/patients/"
+          S3_CLIENT_CLASS_NAME: "telran.pma.S3JsonClient"
           LOGGER_LEVEL: finest
           DB_PASSWORD: 123456.com
       Events: 

@@ -54,7 +54,7 @@ public class CheckingSchema {
     }
 
     private static String checkFlowOnDosing(JSONObject jsonObject, PatientData patientData) {
-        String dosing = jsonObject.getString("dosing");
+        String dosing = jsonObject.optString("dosing");
         if (jsonObject.has("age_adjustment")) {
             JSONObject ageAdjustment = jsonObject.getJSONObject("age_adjustment");
             dosing = ageAdjustment.has("dosing") && ageAdjustment.getInt("max_threshold") < patientData.age()
@@ -81,7 +81,7 @@ public class CheckingSchema {
     }
 
     private static int checkflowOnInterval(JSONObject jsonObject, PatientData patientData) {
-        int interval = jsonObject.getInt("interval");
+        int interval = jsonObject.optInt("interval");
         if (jsonObject.has("age_adjustment")) {
             JSONObject ageAdjustment = jsonObject.getJSONObject("age_adjustment");
             interval = ageAdjustment.has("interval") && ageAdjustment.getInt("max_threshold") < patientData.age()
