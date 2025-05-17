@@ -5,19 +5,18 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.Map;
 
-import telran.pma.api.SaverData;
 import telran.pma.logger.Logger;
 import telran.pma.logger.LoggerStandard;
 
-public class ApprovalSaverData implements SaverData {
-    private static final String DEFAULT_DRIVER_CLASS_NAME = "org.postgresql.Driver";
+public class ApprovalUpdaterData extends ApprovalSaverData {
+        private static final String DEFAULT_DRIVER_CLASS_NAME = "org.postgresql.Driver";
     private static final String DEFAULT_USER_NAME = "postgres";
     private static final String DEFAULT_DB_CONNECTION_STRING = "jdbc:postgresql://postgres-pma.cul4ey8o8fp4.us-east-1.rds.amazonaws.com:5432/postgres";
     Map<String, String> env = System.getenv();
     String connectionStr = getConnectionString();
     String username = getUsername();
     String password = getPassword();
-    Logger logger = new LoggerStandard("approval-saver-data");
+    Logger logger = new LoggerStandard("approval-updater-data");
     Connection con;
     PreparedStatement pstmt;
     static String driverClassName;
@@ -30,11 +29,11 @@ public class ApprovalSaverData implements SaverData {
         }
     }
 
-    public ApprovalSaverData() {
+    public ApprovalUpdaterData() {
         try {
             con = DriverManager.getConnection(connectionStr, username, password);
             pstmt = con.prepareStatement(
-                    "INSERT INTO approvals (id, patient_call_id, type, is_approved, timestamp) VALUES (?, ?, ?, ?, ?)");
+                    "UPDATE approvals SET type = ? WHERE id = ?");
         } catch (Exception e) {
             logger.log("severe", "error: " + e.getMessage());
             throw new RuntimeException(e);
@@ -44,11 +43,8 @@ public class ApprovalSaverData implements SaverData {
     @Override
     public void saveData(Map<String, Object> data) {
         try {
-            pstmt.setLong(1, Long.parseLong(data.get("id").toString()));
-            pstmt.setLong(2, Long.parseLong(data.get("patientCallId").toString()));
-            pstmt.setString(3, data.get("type").toString());
-            pstmt.setBoolean(4, Boolean.getBoolean(data.get("isApproved").toString()));
-            pstmt.setLong(5, Long.parseLong(data.get("timestamp").toString()));
+            pstmt.setString(1, data.get("type").toString());
+            pstmt.setLong(2, Long.parseLong(data.get("id").toString()));
             pstmt.executeUpdate();
             logger.log("info", "Data saved successfully: " + data.toString());
         } catch (Exception e) {
@@ -83,5 +79,4 @@ public class ApprovalSaverData implements SaverData {
         String connectionString = env.getOrDefault("DB_CONNECTION_STRING", DEFAULT_DB_CONNECTION_STRING);
         return connectionString;
     }
-
 }
