@@ -3,74 +3,65 @@ package telran.pma;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-import telran.pma.api.RejectData;
-import telran.pma.api.SaverData;
+import telran.pma.api.NotificationData;
 import telran.pma.api.SettingsData;
 import telran.pma.dataSource.ApprovalsDataSource;
+import telran.pma.dataSource.EmployeesDataSource;
 import telran.pma.dataSource.SettingsDataSource;
 import telran.pma.logger.Logger;
 import telran.pma.logger.LoggerStandard;
 
-public class AppRejectProvider implements RequestHandler<Object, String> {
-    private static final String DEFAULT_STREAM_NAME = "patient-rejects";
-    private static final String DEFAULT_STREAM_CLASS_NAME = "telran.pma.DynamoDbStreamRejectData";
+public class AppNotificationProvider implements RequestHandler<Object, String> {
+    private static final String DEFAULT_STREAM_NAME = "notifications";
+    private static final String DEFAULT_STREAM_CLASS_NAME = "telran.pma.DynamoDbStreamNotificationData";
     private static final String DEFAULT_USER_NAME = "postgres";
     private static final String DEFAULT_DB_CONNECTION_STRING = "jdbc:postgresql://postgres-pma.cul4ey8o8fp4.us-east-1.rds.amazonaws.com:5432/postgres";
-    private final String DEFAULT_DATA_SAVER_CLASS_NAME = "telran.pma.ApprovalUpdaterData";
     Map<String, String> env = System.getenv();
     String streamName = getStreamName();
     String streamClassName = getStreamClassName();
     String connectionStr = getConnectionString();
     String username = getUsername();
     String password = getPassword();
-    String dataSaverClassName = getDataSaverClassName();
-    Logger logger = new LoggerStandard("schedule-reject");
-    MiddlewareDataStream<RejectData> stream;
+    Logger logger = new LoggerStandard("schedule-notification");
+    MiddlewareDataStream<NotificationData> stream;
     SettingsDataSource settingsDataSource = new SettingsDataSource(connectionStr, username, password, logger);
     ApprovalsDataSource approvalsDataSource = new ApprovalsDataSource(connectionStr, username, password, logger);
-    SaverData dataSaver;
+    EmployeesDataSource employeesDataSource = new EmployeesDataSource(connectionStr, username, password, logger);
 
     @SuppressWarnings("unchecked")
-    public AppRejectProvider() {
+    public AppNotificationProvider() {
         logger.log("config", "Stream name is " + streamName);
         logger.log("config", "Stream class name is " + streamClassName);
         try {
-            stream = (MiddlewareDataStream<RejectData>) MiddlewareDataStreamFactory.getStream(streamClassName,
+            stream = (MiddlewareDataStream<NotificationData>) MiddlewareDataStreamFactory.getStream(streamClassName,
                     streamName);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        logger.log("config", "Data saver class name is " + dataSaverClassName);
-        dataSaver = SaverData.getSaverDataInstance(dataSaverClassName, logger);
     }
+
     @Override
     public String handleRequest(Object input, Context context) {
         boolean isComplete = false;
         SettingsData settings = settingsDataSource.getSettings();
-        ArrayList<HashMap<String, Object>> approvals = approvalsDataSource.getApprovals("toDoctor");
+        ArrayList<HashMap<String, Object>> approvals = approvalsDataSource.getApprovals("toNurse");
         for (HashMap<String, Object> approval : approvals) {
-            long interval = (Long)approval.get("timestamp") + settings.intervalForDoctor();
+            long interval = (Long) approval.get("timestamp") + settings.intervalForNurse();
             long currentTime = System.currentTimeMillis();
             if (currentTime > interval) {
-                long id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-                String resason = "The doctor's response time has expired";
-                RejectData rejectData = new RejectData(id, (Long)approval.get("patientCallId"), resason, currentTime);
-                logger.log("finest", "RejectData: " + rejectData.toString());
-                approval.put("type", "toNurse");
-                approval.put("timestamp", currentTime);
-                logger.log("finest", "Approval for update: " + approval.toString());
-                dataSaver.saveData(approval);
-                logger.log("finest", "Approval Data updated successfully");
-                stream.publish(rejectData);
+                HashMap<String, Object> empl = employeesDataSource.getEmployee("Nurse");
+                String message = String.format("time to process patient call expired please process call with id: %d", approval.get("patientCallId"));
+                NotificationData notify = new NotificationData(empl.get("email").toString(), message);
+                logger.log("finest", "NotificationData: " + notify.toString());
+                stream.publish(notify);
                 isComplete = true;
             }
         }
-        return isComplete ? "Function complete" : "Empty Result"; 
+        return isComplete ? "Function complete" : "Empty Result";
     }
 
     private String getPassword() {
@@ -100,9 +91,4 @@ public class AppRejectProvider implements RequestHandler<Object, String> {
         String res = env.getOrDefault("STREAM_CLASS_NAME", DEFAULT_STREAM_CLASS_NAME);
         return res;
     }
-
-    private String getDataSaverClassName() {
-        return env.getOrDefault("DATA_SAVER_CLASS_NAME", DEFAULT_DATA_SAVER_CLASS_NAME);
-    }
-
 }

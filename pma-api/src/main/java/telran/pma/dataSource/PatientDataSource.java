@@ -1,4 +1,4 @@
-package telran.pma;
+package telran.pma.dataSource;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 import telran.pma.api.PatientData;
 import telran.pma.logger.Logger;
 
-public class DataSource {
+public class PatientDataSource {
     private static final String DEFAULT_DRIVER_CLASS_NAME = "org.postgresql.Driver";
     private static final String AGE = "age";
     private static final String WEIGHT = "weight";
@@ -37,8 +37,8 @@ public class DataSource {
     }
     Connection con;
 
-    public DataSource(String connectionStr, String username, String password, Logger logger) {
-        DataSource.logger = logger;
+    public PatientDataSource(String connectionStr, String username, String password, Logger logger) {
+        PatientDataSource.logger = logger;
         logger.log("info", "driver class name: " + driverClassName);
         try {
             con = DriverManager.getConnection(connectionStr, username, password);

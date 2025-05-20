@@ -9,6 +9,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.*;
 
 import telran.pma.api.PatientData;
+import telran.pma.dataSource.PatientDataSource;
 import telran.pma.logger.*;
 
 public class AppPatientDataProvider implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
@@ -19,7 +20,7 @@ public class AppPatientDataProvider implements RequestHandler<APIGatewayProxyReq
     String username = getUsername();
     String password = getPassword();
     Logger logger = new LoggerStandard("patient-data-provider");
-    DataSource dataSource = new DataSource(connectionStr, username, password, logger);
+    PatientDataSource dataSource = new PatientDataSource(connectionStr, username, password, logger);
 
     @Override
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent input, Context context) {

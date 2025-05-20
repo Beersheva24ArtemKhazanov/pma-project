@@ -20,8 +20,8 @@ public class Main {
     static final int TIMEOUT_RESPONSE = 10000;
     static final String DEFAULT_HOST = "localhost";
     static final int DEFAULT_PORT = 5500;
-    static final int DEFAULT_N_PATIENTS = 5;
-    static final int DEFAULT_N_PACKETS = 10;
+    static final int DEFAULT_N_PATIENTS = 10;
+    static final int DEFAULT_N_PACKETS = 20;
     static final long PATIENT_ID_FOR_INFO_LOGGING = 3;
     static HashMap<Long, Integer> patientIdVasLevel = new HashMap<>();
     static DatagramSocket socket = null;

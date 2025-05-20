@@ -111,6 +111,32 @@ Resources:
             FilterCriteria:
               Filters:
                 - Pattern: '{"eventName": ["INSERT"]}'
+  NotificationSenderFunction:
+    Type: AWS::Serverless::Function
+    Properties: 
+      CodeUri: notification-sender
+      Handler: telran.pma.AppEmailNotifier::handleRequest
+      Policies: 
+        - Statement:
+            Effect: Allow
+            Resource: '*'
+            Action:
+              - dynamodb:*
+      Environment:
+        Variables:
+          LOGGER_LEVEL: finest
+          EMAIL_SENDER_CLASS_NAME: "telran.pma.MailSenderSes"
+          DB_PASSWORD: 123456.com
+      Events: 
+        DynamoDbItemInsert:
+          Type: DynamoDB
+          Properties:
+            StartingPosition: LATEST
+            BatchSize: 1
+            Stream: !GetAtt NotificationStream.StreamArn
+            FilterCriteria:
+              Filters:
+                - Pattern: '{"eventName": ["INSERT"]}'
   ApprovalStream:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -187,6 +213,25 @@ Resources:
         WriteCapacityUnits: 5
       StreamSpecification:
         StreamViewType: NEW_IMAGE
+  NotificationStream:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: notifications
+      KeySchema:
+        - AttributeName: email
+          KeyType: HASH
+        - AttributeName: message
+          KeyType: RANGE
+      AttributeDefinitions:
+        - AttributeName: email
+          AttributeType: S
+        - AttributeName: message
+          AttributeType: S
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      StreamSpecification:
+        StreamViewType: NEW_IMAGE
   PatientDataProviderFunction:
     Type: AWS::Serverless::Function
     Properties: 
@@ -201,6 +246,36 @@ Resources:
           Properties:
             Path: /patients
             Method: get
+  SchedulerRejectFunction:
+    Type: AWS::Serverless::Function
+    Properties: 
+      CodeUri: scheduler-reject-function
+      Handler: telran.pma.AppRejectProvider::handleRequest
+      Environment:
+        Variables:
+          DB_PASSWORD: 123456.com
+          STREAM_NAME: patient-rejects
+          STREAM_CLASS_NAME: telran.pma.DynamoDbStreamRejectData
+      Events:
+        ScheduledEvent:
+          Type: Schedule
+          Properties:
+            Schedule: rate(5 minutes)
+  SchedulerNotificationFunction:
+    Type: AWS::Serverless::Function
+    Properties: 
+      CodeUri: scheduler-notification-function
+      Handler: telran.pma.AppNotificationProvider::handleRequest
+      Environment:
+        Variables:
+          DB_PASSWORD: 123456.com
+          STREAM_NAME: notifications
+          STREAM_CLASS_NAME: telran.pma.DynamoDbStreamNotificationData
+      Events:
+        ScheduledEvent:
+          Type: Schedule
+          Properties:
+            Schedule: rate(5 minutes)
 
 Outputs:
   PatientDataProviderApi:

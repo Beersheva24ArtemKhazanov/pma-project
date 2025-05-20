@@ -1,22 +1,19 @@
-package telran.pma;
+package telran.pma.dataSource;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.NoSuchElementException;
 
+import telran.pma.api.SettingsData;
 import telran.pma.logger.Logger;
 
-public class ApprovalsDataSource {
+public class SettingsDataSource {
     private static final String DEFAULT_DRIVER_CLASS_NAME = "org.postgresql.Driver";
-    private static final String ID = "id";
-    private static final String PATIENT_CALL_ID = "patient_call_id";
-    private static final String TYPE = "type";
-    private static final String IS_APPROVED = "is_approved";
-    private static final String TIMESTAMP = "timestamp";
+    private static final String INTERVAL_FOR_DOCTOR = "interval_for_doctor";
+    private static final String INTERVAL_FOR_NURSE = "interval_for_nurse";
     PreparedStatement pstmt;
     static Logger logger;
     static String driverClassName;
@@ -24,14 +21,14 @@ public class ApprovalsDataSource {
         driverClassName = getDriverClassName();
         try {
             Class.forName(driverClassName);
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
             throw new RuntimeException("Driver class not found: " + driverClassName, e);
         }
     }
     Connection con;
 
-    public ApprovalsDataSource(String connectionStr, String username, String password, Logger logger) {
-        ApprovalsDataSource.logger = logger;
+    public SettingsDataSource(String connectionStr, String username, String password, Logger logger) {
+        SettingsDataSource.logger = logger;
         logger.log("info", "driver class name: " + driverClassName);
         try {
             con = DriverManager.getConnection(connectionStr, username, password);
@@ -40,26 +37,21 @@ public class ApprovalsDataSource {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    public Map<String, Object>[] getApprovals() {
-        String query = "SELECT * FROM approvals WHERE is_approved = false AND type = 'toDoctor'";
-        ArrayList<Map<String, Object>> approvals = new ArrayList<>();
+    public SettingsData getSettings() {
+        String query = "SELECT * from settings";
         try {
             pstmt = con.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                approvals.add(Map.of(
-                    "id", rs.getLong(ID),
-                    "patientCallId", rs.getLong(PATIENT_CALL_ID),
-                    "type", rs.getString(TYPE),
-                    "isApproved", rs.getBoolean(IS_APPROVED),
-                    "timestamp", rs.getLong(TIMESTAMP)
-                ));
+                return new SettingsData(
+                        rs.getLong(INTERVAL_FOR_DOCTOR),
+                        rs.getLong(INTERVAL_FOR_NURSE));
+            } else {
+                throw new NoSuchElementException("Settings on found");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return approvals.toArray(new Map[0]);
     }
 
     private static String getDriverClassName() {
@@ -69,5 +61,4 @@ public class ApprovalsDataSource {
         }
         return driverClassName;
     }
-
 }
