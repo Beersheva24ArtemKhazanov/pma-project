@@ -37,15 +37,15 @@ public class AppRejectProvider implements RequestHandler<Object, String> {
 
     @SuppressWarnings("unchecked")
     public AppRejectProvider() {
-        logger.log("config", "Stream name is " + streamName);
-        logger.log("config", "Stream class name is " + streamClassName);
+        logger.log("finest", "Stream name is " + streamName);
+        logger.log("finest", "Stream class name is " + streamClassName);
         try {
             stream = (MiddlewareDataStream<RejectData>) MiddlewareDataStreamFactory.getStream(streamClassName,
                     streamName);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        logger.log("config", "Data saver class name is " + dataSaverClassName);
+        logger.log("finest", "Data saver class name is " + dataSaverClassName);
         dataSaver = SaverData.getSaverDataInstance(dataSaverClassName, logger);
     }
     @Override
@@ -61,15 +61,16 @@ public class AppRejectProvider implements RequestHandler<Object, String> {
                 String resason = "The doctor's response time has expired";
                 RejectData rejectData = new RejectData(id, (Long)approval.get("patientCallId"), resason, currentTime);
                 logger.log("finest", "RejectData: " + rejectData.toString());
+                stream.publish(rejectData);
                 approval.put("type", "toNurse");
                 approval.put("timestamp", currentTime);
                 logger.log("finest", "Approval for update: " + approval.toString());
                 dataSaver.saveData(approval);
                 logger.log("finest", "Approval Data updated successfully");
-                stream.publish(rejectData);
                 isComplete = true;
             }
         }
+        logger.log("finest", isComplete ? "Function complete" : "Empty Result");
         return isComplete ? "Function complete" : "Empty Result"; 
     }
 

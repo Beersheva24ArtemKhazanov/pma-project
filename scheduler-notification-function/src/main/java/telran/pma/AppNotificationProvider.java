@@ -34,8 +34,8 @@ public class AppNotificationProvider implements RequestHandler<Object, String> {
 
     @SuppressWarnings("unchecked")
     public AppNotificationProvider() {
-        logger.log("config", "Stream name is " + streamName);
-        logger.log("config", "Stream class name is " + streamClassName);
+        logger.log("finest", "Stream name is " + streamName);
+        logger.log("finest", "Stream class name is " + streamClassName);
         try {
             stream = (MiddlewareDataStream<NotificationData>) MiddlewareDataStreamFactory.getStream(streamClassName,
                     streamName);
@@ -61,6 +61,7 @@ public class AppNotificationProvider implements RequestHandler<Object, String> {
                 isComplete = true;
             }
         }
+        logger.log("finest", isComplete ? "Function complete" : "Empty Result");
         return isComplete ? "Function complete" : "Empty Result";
     }
 

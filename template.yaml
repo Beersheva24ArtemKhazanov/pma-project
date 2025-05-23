@@ -121,7 +121,7 @@ Resources:
             Effect: Allow
             Resource: '*'
             Action:
-              - dynamodb:*
+              - ses:*
       Environment:
         Variables:
           LOGGER_LEVEL: finest
@@ -240,6 +240,7 @@ Resources:
       Environment:
         Variables:
           DB_PASSWORD: 123456.com
+          LOGGER_LEVEL: "finest"
       Events:
         PatientDataProvider:
           Type: Api
@@ -251,11 +252,18 @@ Resources:
     Properties: 
       CodeUri: scheduler-reject-function
       Handler: telran.pma.AppRejectProvider::handleRequest
+      Policies: 
+        - Statement:
+            Effect: Allow
+            Resource: '*'
+            Action:
+              - dynamodb:*
       Environment:
         Variables:
           DB_PASSWORD: 123456.com
           STREAM_NAME: patient-rejects
           STREAM_CLASS_NAME: telran.pma.DynamoDbStreamRejectData
+          LOGGER_LEVEL: finest
       Events:
         ScheduledEvent:
           Type: Schedule
@@ -266,11 +274,18 @@ Resources:
     Properties: 
       CodeUri: scheduler-notification-function
       Handler: telran.pma.AppNotificationProvider::handleRequest
+      Policies: 
+        - Statement:
+            Effect: Allow
+            Resource: '*'
+            Action:
+              - dynamodb:*
       Environment:
         Variables:
           DB_PASSWORD: 123456.com
           STREAM_NAME: notifications
           STREAM_CLASS_NAME: telran.pma.DynamoDbStreamNotificationData
+          LOGGER_LEVEL: finest
       Events:
         ScheduledEvent:
           Type: Schedule
