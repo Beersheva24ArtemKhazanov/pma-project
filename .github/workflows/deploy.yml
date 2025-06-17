@@ -34,7 +34,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: "patient-call-receiver/target/patient-call-receiver.jar,patient-call-receiver/Dockerfile"
+          source: "patient-call-receiver/target/patient-call-receiver-1.0-SNAPSHOT.jar, patient-call-receiver/Dockerfile"
           target: "~/patient-call-receiver-deploy"
 
       - name: Deploy on EC2 via SSH
