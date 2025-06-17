@@ -22,7 +22,6 @@ jobs:
           distribution: 'temurin'
 
       - name: Build all modules
-        working-directory: patient-call-receiver
         run: mvn clean install -DskipTests
 
       - name: Build JAR
