@@ -5,6 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>telran.pma</groupId>
+    <parent>
+        <groupId>telran.pma</groupId>
+        <artifactId>pma-project</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
     <artifactId>patient-call-receiver</artifactId>
     <version>1.0-SNAPSHOT</version>
 
