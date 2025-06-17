@@ -20,7 +20,7 @@ public class Main {
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
-        System.out.println("Application started!");
+        System.out.println(String.format("Application started! and listening port %s", PORT));
         try (DatagramSocket socket = new DatagramSocket(PORT);) {
             @SuppressWarnings("unchecked")
             MiddlewareDataStream<PatientCallData> stream = MiddlewareDataStreamFactory.getStream(getDataStreamCalssName(), getTableName());
