@@ -28,13 +28,16 @@ jobs:
         working-directory: patient-call-receiver
         run: mvn clean package -DskipTests
 
+      - name: Debug - List files before copy
+        run: ls -l patient-call-receiver/
+
       - name: Copy files to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: "patient-call-receiver/target/patient-call-receiver-1.0-SNAPSHOT.jar,patient-call-receiver/Dockerfile"
+          source: "patient-call-receiver/Dockerfile,patient-call-receiver/target/patient-call-receiver-1.0-SNAPSHOT.jar"
           target: "/home/ec2-user/patient-call-receiver-deploy"
           strip_components: 2
 
