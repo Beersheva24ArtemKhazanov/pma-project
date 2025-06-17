@@ -36,6 +36,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "patient-call-receiver/target/patient-call-receiver-1.0-SNAPSHOT.jar,patient-call-receiver/Dockerfile"
           target: "/home/ec2-user/patient-call-receiver-deploy"
+          strip_components: 2
 
       - name: Deploy on EC2 via SSH
         uses: appleboy/ssh-action@v1.0.3
