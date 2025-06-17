@@ -18,7 +18,7 @@ public class Main {
     static final int MAX_VAS_LEVEL = 10;
     static final int TIMEOUT_SEND = 500;
     static final int TIMEOUT_RESPONSE = 10000;
-    static final String DEFAULT_HOST = "localhost";
+    static final String DEFAULT_HOST = "ec2-3-90-7-60.compute-1.amazonaws.com";
     static final int DEFAULT_PORT = 5500;
     static final int DEFAULT_N_PATIENTS = 10;
     static final int DEFAULT_N_PACKETS = 20;
